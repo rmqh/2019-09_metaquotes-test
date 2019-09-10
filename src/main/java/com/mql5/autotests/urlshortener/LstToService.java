@@ -7,7 +7,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.mapper.ObjectMapperType;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -31,6 +30,7 @@ public class LstToService implements UrlShortenerService {
 
     @Override
     public String shortenUrl(String currentUrl) {
+        LOG.debug("Shorten url: {}", currentUrl);
         RequestData requestData = new RequestData("true", currentUrl, "utm_source=[domain]&utm_referer=[referer]");
 
         LstToRequest request = new LstToRequest();
@@ -47,18 +47,14 @@ public class LstToService implements UrlShortenerService {
 
     @Override
     public boolean isExist(String shortUrl) {
-        String path = String.format("%s/%s", LINK, shortUrl.split("/")[3]);
-        LOG.info("Path: {}", path);
-
-        Response response = rs.get(path);
-        return response.getStatusCode() == HttpStatus.SC_OK;
+        return rs.get(String.format("%s/%s", LINK, shortUrl.split("/")[3]))
+                .getStatusCode() == HttpStatus.SC_OK;
     }
 
     @Override
     public void deleteUrl(String shortUrl) {
+        LOG.debug("Delete url: {}", shortUrl);
         String path = String.format("%s/%s", LINK, shortUrl.split("/")[3]);
-        LOG.info("Path: {}", path);
-
         rs.delete(path)
                 .then()
                 .statusCode(HttpStatus.SC_OK);

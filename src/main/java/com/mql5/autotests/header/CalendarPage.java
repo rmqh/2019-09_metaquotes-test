@@ -393,7 +393,7 @@ public class CalendarPage extends AbstractPage {
     }
 
     private void selectEventImportance(String id) {
-        logger.debug("Select event importance by id: {}", id);
+        logger.trace("Select event importance by id: {}", id);
         if (!$(By.id(id)).isSelected()) {
             logger.debug("Element is not selected. Select it.");
             $(By.id(id)).$x("following-sibling::label").click();
@@ -401,7 +401,7 @@ public class CalendarPage extends AbstractPage {
     }
 
     private void deselectEventImportance(String id) {
-        logger.debug("Deselect event importance by id: {}", id);
+        logger.trace("Deselect event importance by id: {}", id);
 
         SelenideElement element = $(By.id(id));
         boolean selected = element.isSelected();
