@@ -41,6 +41,7 @@ public class StepDefinitions {
 
     private static final String CHROME = "chrome";
     private static final String FIREFOX = "firefox";
+
     private static final SimpleDateFormat FORMAT_EN = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
 
     private static final String TOKEN_LST_TO = "d8458d1a9f3d9e13f83651e8";
@@ -48,43 +49,10 @@ public class StepDefinitions {
 
     private UrlShortenerService service = new LstToService(TOKEN_LST_TO, USER_AGENT);
 
-    private MainPage mainPage;
+    private MainPage mainPage = new MainPage();
     private CalendarPage calendarPage;
     private EventPage eventPage;
 
-    @Before
-    public void setUp() throws Exception {
-        Properties properties = getProperties();
-        LOG.info("Properties: {}", properties);
-
-        String browserName = properties.getProperty("browserName");
-        String userAgent = properties.getProperty("userAgent");
-        String baseUrl = properties.getProperty("baseUrl");
-
-        Configuration.baseUrl = baseUrl;
-
-        WebDriver driver;
-
-        switch (browserName) {
-            case CHROME:
-                driver = getUpChromeDriver(userAgent);
-                break;
-            case FIREFOX:
-                driver = getUpFirefoxDriver(userAgent);
-                break;
-            default:
-                throw new InvalidArgumentException("Unexpected browser name");
-        }
-
-        WebDriverRunner.setWebDriver(driver);
-
-        mainPage = new MainPage();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        WebDriverRunner.getWebDriver().close();
-    }
 
     // steps
 
@@ -230,7 +198,37 @@ public class StepDefinitions {
         service.deleteUrl(shortUrl);
     }
 
-    // private methods
+    @Before
+    public void setUp() throws Exception {
+        Properties properties = getProperties();
+        LOG.info("Properties: {}", properties);
+
+        String browserName = properties.getProperty("browserName");
+        String userAgent = properties.getProperty("userAgent");
+        String baseUrl = properties.getProperty("baseUrl");
+
+        Configuration.baseUrl = baseUrl;
+
+        WebDriver driver;
+
+        switch (browserName) {
+            case CHROME:
+                driver = getUpChromeDriver(userAgent);
+                break;
+            case FIREFOX:
+                driver = getUpFirefoxDriver(userAgent);
+                break;
+            default:
+                throw new InvalidArgumentException("Unexpected browser name");
+        }
+
+        WebDriverRunner.setWebDriver(driver);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        WebDriverRunner.getWebDriver().close();
+    }
 
     private static Properties getProperties() throws IOException {
         Properties properties = new Properties();

@@ -21,6 +21,8 @@
         <webdrivermanager.version>3.6.2</webdrivermanager.version>
         <rest-assured.version>4.1.1</rest-assured.version>
         <jackson.version>2.10.0.pr2</jackson.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <allure-junit4.version>2.13.0</allure-junit4.version>
 
     </properties>
 
@@ -94,13 +96,18 @@
             <version>${jackson.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>${allure-junit4.version}</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -168,6 +175,34 @@
             </testResource>
         </testResources>
 
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+
     </build>
+
 
 </project>
