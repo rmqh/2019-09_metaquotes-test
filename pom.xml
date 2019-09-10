@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mql5.autotests</groupId>
+    <artifactId>economic-calendar</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <selenide.version>5.2.8</selenide.version>
+        <junit.version>4.12</junit.version>
+        <cucumber.version>4.7.2</cucumber.version>
+        <slf4j.version>1.7.28</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <webdrivermanager.version>3.6.2</webdrivermanager.version>
+        <rest-assured.version>4.1.1</rest-assured.version>
+        <jackson.version>2.10.0.pr2</jackson.version>
+
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--logging-->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!--webdriver manager-->
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <!--rest assured-->
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <profiles>
+
+        <!--browsers-->
+
+        <profile>
+            <id>browser-chrome</id>
+            <properties>
+                <browser.name>chrome</browser.name>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>browser-firefox</id>
+            <properties>
+                <browser.name>firefox</browser.name>
+            </properties>
+        </profile>
+
+        <!--user agents-->
+
+        <profile>
+            <id>useragent-googlebot</id>
+            <properties>
+                <user.agent>Googlebot/2.1 (+http://www.google.com/bot.html)</user.agent>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>useragent-firefox</id>
+            <properties>
+                <user.agent>Mozilla/5.0 (Windows NT 5.1; rv:9.0.1) Gecko/20100101 Firefox/9.0.1</user.agent>
+            </properties>
+        </profile>
+
+        <!--environments-->
+
+        <profile>
+            <id>env-test</id>
+            <properties>
+                <baseurl>http://test.mql5.com</baseurl>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>env-prod</id>
+            <properties>
+                <baseurl>https://www.mql5.com</baseurl>
+            </properties>
+        </profile>
+
+    </profiles>
+
+    <build>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
+    </build>
+
+</project>
