@@ -1,10 +1,9 @@
-package com.mql5.autotests.header;
+package com.mql5.autotests.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.mql5.autotests.AbstractPage;
-import com.mql5.autotests.EventPage;
 import com.mql5.autotests.enums.Currency;
 import org.openqa.selenium.By;
 

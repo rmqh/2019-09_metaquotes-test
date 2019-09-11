@@ -1,12 +1,14 @@
-package com.mql5.autotests;
+package com.mql5.autotests.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.mql5.autotests.AbstractPage;
+import com.mql5.autotests.EventHistory;
 
 import java.util.*;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class EventPage {
+public class EventPage extends AbstractPage {
 
     private SelenideElement bodyContent = $("#bodyContent");
     private SelenideElement calendarTabs = $("#calendar-tabs");
@@ -25,21 +27,25 @@ public class EventPage {
     // tabs
 
     public EventPage openOverviewTab() {
+        logger.info("Open Overview tab");
         selectEventTab("overview");
         return this;
     }
 
     public EventPage openChartTab() {
+        logger.info("Open Chart tab");
         selectEventTab("chart");
         return this;
     }
 
     public EventPage openHistoryTab() {
+        logger.info("Open History tab");
         selectEventTab("history");
         return this;
     }
 
     public EventPage openWidgetTab() {
+        logger.info("Open Widget tab");
         selectEventTab("widget");
         return this;
     }

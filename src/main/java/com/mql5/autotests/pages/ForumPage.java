@@ -1,4 +1,4 @@
-package com.mql5.autotests.header;
+package com.mql5.autotests.pages;
 
 import com.mql5.autotests.AbstractPage;
 

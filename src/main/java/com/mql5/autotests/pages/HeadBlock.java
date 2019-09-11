@@ -1,7 +1,6 @@
-package com.mql5.autotests.header;
+package com.mql5.autotests.pages;
 
 import com.codeborne.selenide.Condition;
-import com.mql5.autotests.MainPage;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;

@@ -2,7 +2,7 @@ package com.mql5.autotests;
 
 import com.codeborne.selenide.WebDriverRunner;
 import com.mql5.autotests.enums.Language;
-import com.mql5.autotests.header.*;
+import com.mql5.autotests.pages.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;

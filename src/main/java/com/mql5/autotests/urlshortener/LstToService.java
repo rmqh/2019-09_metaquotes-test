@@ -30,7 +30,7 @@ public class LstToService implements UrlShortenerService {
 
     @Override
     public String shortenUrl(String currentUrl) {
-        LOG.debug("Shorten url: {}", currentUrl);
+        LOG.debug("Shortening URL: {}", currentUrl);
         RequestData requestData = new RequestData("true", currentUrl, "utm_source=[domain]&utm_referer=[referer]");
 
         LstToRequest request = new LstToRequest();
@@ -53,7 +53,7 @@ public class LstToService implements UrlShortenerService {
 
     @Override
     public void deleteUrl(String shortUrl) {
-        LOG.debug("Delete url: {}", shortUrl);
+        LOG.debug("Deleting URL: {}", shortUrl);
         String path = String.format("%s/%s", LINK, shortUrl.split("/")[3]);
         rs.delete(path)
                 .then()
