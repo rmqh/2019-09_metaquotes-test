@@ -184,7 +184,7 @@ public class StepDefinitions {
     @And("Print event history for last {int} months")
     public void printEventHistoryForLastMonths(int months) {
         eventPage.openHistoryTab();
-        printHistories(eventPage.getLogs(12));
+        printHistories(eventPage.getLogs(months));
     }
 
     @And("Print event page short url")
